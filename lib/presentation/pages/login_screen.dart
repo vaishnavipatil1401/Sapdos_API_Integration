@@ -25,40 +25,113 @@ class LoginScreen extends StatelessWidget {
             );
           }
         },
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              CustomTextField(
-                controller: emailController,
-                hintText: 'Email',
-                keyboardType: TextInputType.emailAddress,
+        child: Row(
+          children: [
+            Expanded(
+              child: Image.asset(
+                'assets/images/main_image.jpg', // Ensure this path matches your asset
+                fit: BoxFit.cover,
               ),
-              CustomTextField(
-                controller: passwordController,
-                hintText: 'Password',
-                obscureText: true,
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Sapdos',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      'Welcome Back',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      'Enter existing account’s details',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    SizedBox(height: 16),
+                    CustomTextField(
+                      controller: emailController,
+                      hintText: 'Email',
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    SizedBox(height: 16),
+                    CustomTextField(
+                      controller: passwordController,
+                      hintText: 'Password',
+                      obscureText: true,
+                    ),
+                    SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: false,
+                              onChanged: (bool? value) {
+                                // Handle "Remember me" checkbox change
+                              },
+                            ),
+                            Text('Remember me'),
+                          ],
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            // Handle "Forgot Password?" action
+                          },
+                          child: Text('Forgot Password?'),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 16),
+                    CustomButton(
+                      text: 'Login',
+                      onPressed: () {
+                          final loginRequest = LoginRequestModel(
+                          email: emailController.text,
+                          password: passwordController.text,
+                         
+                        );
+                        BlocProvider.of<LoginUserBloc>(context).add(
+                          LoginButtonPressed(loginRequest: loginRequest),
+                        );
+                      },
+                    ),
+                    SizedBox(height: 16),
+                    Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Not on Sapdos?'),
+                          TextButton(
+                            onPressed: () {
+                              //Navigator.pushNamed(context, '/sign-up');
+                              Navigator.pushNamed(context, '/doctor-dashboard');
+                            },
+                            child: Text('Sign-Up'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              CustomButton(
-                text: 'Login',
-                onPressed: () {
-                  final loginRequest = LoginRequestModel(
-                    email: emailController.text,
-                    password: passwordController.text,
-                  );
-                  BlocProvider.of<LoginUserBloc>(context).add(
-                    LoginButtonPressed(loginRequest: loginRequest),
-                  );
-                },
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/sign-up');
-                },
-                child: Text('Sign-Up'),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

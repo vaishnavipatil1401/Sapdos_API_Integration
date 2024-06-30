@@ -1,4 +1,3 @@
-//sign_up_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sapdos_api_integration_assignment/presentation/bloc/register/register_user_bloc.dart';
@@ -12,8 +11,7 @@ class SignUpScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,51 +27,110 @@ class SignUpScreen extends StatelessWidget {
             );
           }
         },
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              CustomTextField(
-                controller: emailController,
-                hintText: 'Email',
-                keyboardType: TextInputType.emailAddress,
+        child: Row(
+          children: [
+            Expanded(
+              child: Image.asset(
+                'assets/images/main_image.jpg', // Ensure this path matches your asset
+                fit: BoxFit.cover,
               ),
-              CustomTextField(
-                controller: phoneController,
-                hintText: 'Phone Number',
-                keyboardType: TextInputType.phone,
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Column(
+                        children: [
+                          Text(
+                            'Sapdos',
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            'Register',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            'Enter new account’s details',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          SizedBox(height: 16),
+                        ],
+                      ),
+                    ),
+                    CustomTextField(
+                      controller: emailController,
+                      hintText: 'Email',
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    CustomTextField(
+                      controller: phoneController,
+                      hintText: 'Phone Number',
+                      keyboardType: TextInputType.phone,
+                    ),
+                    CustomTextField(
+                      controller: passwordController,
+                      hintText: 'Password',
+                      obscureText: true,
+                    ),
+                    CustomTextField(
+                      controller: confirmPasswordController,
+                      hintText: 'Confirm Password',
+                      obscureText: true,
+                    ),
+                    CustomButton(
+                      text: 'Sign-Up',
+                      onPressed: () {
+                        final registerRequest = RegisterRequestModel(
+                          email: emailController.text,
+                          phoneNumber: phoneController.text,
+                          password: passwordController.text,
+                        );
+                        if (passwordController.text == confirmPasswordController.text) {
+                          BlocProvider.of<RegisterUserBloc>(context).add(
+                            RegisterButtonPressed(registerRequest: registerRequest),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Passwords do not match')),
+                          );
+                        }
+                      },
+                    ),
+                    SizedBox(height: 16),
+                    Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Already on Sapdos?'),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/login');
+                            },
+                            child: Text('Sign-In'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              CustomTextField(
-                controller: passwordController,
-                hintText: 'Password',
-                obscureText: true,
-              ),
-              CustomTextField(
-                controller: confirmPasswordController,
-                hintText: 'Confirm Password',
-                obscureText: true,
-              ),
-              CustomButton(
-                text: 'Sign-Up',
-                onPressed: () {
-                  final registerRequest = RegisterRequestModel(
-                    email: emailController.text,
-                    phoneNumber: phoneController.text,
-                    password: passwordController.text,
-                  );
-                  BlocProvider.of<RegisterUserBloc>(context).add(
-                    RegisterButtonPressed(registerRequest: registerRequest),
-                  );
-                },
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/login');
-                },
-                child: Text('Sign-In'),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

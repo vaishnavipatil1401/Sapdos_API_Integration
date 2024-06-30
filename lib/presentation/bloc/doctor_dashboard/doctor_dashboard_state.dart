@@ -29,3 +29,5 @@ class DoctorDashboardFailure extends DoctorDashboardState {
   @override
   List<Object> get props => [error];
 }
+
+class DoctorDashboardEmpty extends DoctorDashboardState {}

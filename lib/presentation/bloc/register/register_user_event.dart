@@ -1,4 +1,3 @@
-//register_user_event.dart
 import 'package:equatable/equatable.dart';
 import 'package:sapdos_api_integration_assignment/data/models/register_request_model.dart';
 

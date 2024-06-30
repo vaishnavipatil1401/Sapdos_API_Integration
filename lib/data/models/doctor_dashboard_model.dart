@@ -11,12 +11,12 @@ class Appointment {
     required this.patientId,
   });
 
-  factory Appointment.fromJson(Map<String, dynamic> json) {
+  factory Appointment.fromJson(Map<String, dynamic>? json) {
     return Appointment(
-      patientName: json['patientName'],
-      time: json['time'],
-      isCompleted: json['isCompleted'],
-      patientId: json['patientId'],
+      patientName: json?['patientName'] ?? '',
+      time: json?['time'] ?? '',
+      isCompleted: json?['isCompleted'] ?? false,
+      patientId: json?['patientId'] ?? '',
     );
   }
 }
@@ -26,7 +26,11 @@ class DoctorDashboardModel {
 
   DoctorDashboardModel({required this.appointments});
 
-  factory DoctorDashboardModel.fromJson(Map<String, dynamic> json) {
+  factory DoctorDashboardModel.fromJson(Map<String, dynamic>? json) {
+    if (json == null || json['appointments'] == null) {
+      return DoctorDashboardModel(appointments: []);
+    }
+
     var list = json['appointments'] as List;
     List<Appointment> appointmentsList =
         list.map((i) => Appointment.fromJson(i)).toList();
