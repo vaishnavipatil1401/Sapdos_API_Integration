@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'presentation/screens/doctor_dashboard_screen.dart';
-import 'presentation/screens/doctor_list_screen.dart';
-import 'presentation/screens/book_appointment_screen.dart';
+import 'presentation/pages/doctor_dashboard_screen.dart';
+import 'presentation/pages/doctor_list_screen.dart';
+import 'presentation/pages/book_appointment_screen.dart';
 import 'data/repositories/api_service.dart';
 import 'domain/usecases/get_doctor_dashboard.dart';
 import 'domain/usecases/get_patient.dart';
