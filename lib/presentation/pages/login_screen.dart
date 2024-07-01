@@ -29,7 +29,7 @@ class LoginScreen extends StatelessWidget {
           children: [
             Expanded(
               child: Image.asset(
-                'assets/images/main_image.jpg', // Ensure this path matches your asset
+                'assets/images/main_image.jpg', 
                 fit: BoxFit.cover,
               ),
             ),
@@ -83,7 +83,7 @@ class LoginScreen extends StatelessWidget {
                             Checkbox(
                               value: false,
                               onChanged: (bool? value) {
-                                // Handle "Remember me" checkbox change
+                              
                               },
                             ),
                             Text('Remember me'),
@@ -91,7 +91,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         TextButton(
                           onPressed: () {
-                            // Handle "Forgot Password?" action
+                            
                           },
                           child: Text('Forgot Password?'),
                         ),
@@ -119,8 +119,8 @@ class LoginScreen extends StatelessWidget {
                           Text('Not on Sapdos?'),
                           TextButton(
                             onPressed: () {
-                              //Navigator.pushNamed(context, '/sign-up');
-                              Navigator.pushNamed(context, '/doctor-dashboard');
+                              Navigator.pushNamed(context, '/sign-up');
+                              //Navigator.pushNamed(context, '/doctor-dashboard');
                             },
                             child: Text('Sign-Up'),
                           ),

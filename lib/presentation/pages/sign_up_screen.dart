@@ -31,7 +31,7 @@ class SignUpScreen extends StatelessWidget {
           children: [
             Expanded(
               child: Image.asset(
-                'assets/images/main_image.jpg', // Ensure this path matches your asset
+                'assets/images/main_image.jpg',
                 fit: BoxFit.cover,
               ),
             ),

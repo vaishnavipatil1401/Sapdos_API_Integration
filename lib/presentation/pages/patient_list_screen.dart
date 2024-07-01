@@ -19,7 +19,7 @@ class PatientListScreen extends StatelessWidget {
               return Center(child: CircularProgressIndicator());
             } else if (state is PatientLoaded) {
               return ListView.builder(
-                itemCount: 1, // Adjust itemCount based on your data
+                itemCount: 1, 
                 itemBuilder: (context, index) {
                   return ListTile(
                     title: Text(state.patient.name),

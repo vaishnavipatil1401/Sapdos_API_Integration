@@ -5,7 +5,7 @@ abstract class DoctorDashboardState extends Equatable {
   const DoctorDashboardState();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 class DoctorDashboardInitial extends DoctorDashboardState {}
@@ -18,7 +18,7 @@ class DoctorDashboardLoaded extends DoctorDashboardState {
   const DoctorDashboardLoaded({required this.doctorDashboard});
 
   @override
-  List<Object> get props => [doctorDashboard];
+  List<Object?> get props => [doctorDashboard];
 }
 
 class DoctorDashboardFailure extends DoctorDashboardState {
@@ -27,7 +27,5 @@ class DoctorDashboardFailure extends DoctorDashboardState {
   const DoctorDashboardFailure({required this.error});
 
   @override
-  List<Object> get props => [error];
+  List<Object?> get props => [error];
 }
-
-class DoctorDashboardEmpty extends DoctorDashboardState {}

@@ -23,7 +23,7 @@ class PatientDetailsScreen extends StatelessWidget {
                 children: [
                   ExpansionPanelList(
                     expansionCallback: (index, isExpanded) {
-                      // Handle expansion logic here
+                      
                     },
                     children: [
                       ExpansionPanel(

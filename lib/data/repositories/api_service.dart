@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:sapdos_api_integration_assignment/data/models/patient_model.dart';
+import '../models/doctor_dashboard_model.dart';
+import '../models/doctor_model.dart';
+import '../models/patient-model.dart';
 
 class ApiService {
   final Dio _dio = Dio();
@@ -24,13 +26,24 @@ class ApiService {
     }
   }
 
+  Future<DoctorDashboardModel> getDoctorDashboard() async {
+    final response = await get('https://sapdos-api-v2.azurewebsites.net/api/Doctor/GetDoctorDashbord');
+    return DoctorDashboardModel.fromJson(response);
+  }
+
   Future<Patient> getPatientDetails(String patientId) async {
-    try {
-      final response = await get('https://api.example.com/patients/$patientId');
-      return Patient.fromJson(response);
-    } catch (e) {
-      print('Error while fetching patient details: $e');
-      rethrow; // Rethrow the caught exception to propagate it further
-    }
+    final response = await get('https://sapdos-api-v2.azurewebsites.net/api/Patient/GetPatientByUId?PatientUId=$patientId');
+    return Patient.fromJson(response);
+  }
+
+  Future<Doctor> getDoctorDetails(String doctorId) async {
+    final response = await get('https://sapdos-api-v2.azurewebsites.net/api/Doctor/GetDoctorByUId?DoctorUId=$doctorId');
+    return Doctor.fromJson(response);
+  }
+
+  Future<List<Doctor>> getDoctorList() async {
+    final response = await get('https://sapdos-api-v2.azurewebsites.net/api/Doctor/GetDoctorList');
+    final doctors = (response['data'] as List).map((e) => Doctor.fromJson(e)).toList();
+    return doctors;
   }
 }

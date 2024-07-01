@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sapdos_api_integration_assignment/presentation/bloc/doctor_dashboard/doctor_dashboard_bloc.dart';
 import 'package:sapdos_api_integration_assignment/presentation/bloc/doctor_dashboard/doctor_dashboard_event.dart';
 import 'package:sapdos_api_integration_assignment/presentation/bloc/doctor_dashboard/doctor_dashboard_state.dart';
+import 'package:sapdos_api_integration_assignment/presentation/pages/doctor_details_screen.dart';
 
-// DoctorDashboardScreen
 class DoctorDashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final doctorDashboardBloc = BlocProvider.of<DoctorDashboardBloc>(context);
-    doctorDashboardBloc.add(FetchDoctorDashboard()); // Trigger the fetch event
+    doctorDashboardBloc.add(FetchDoctorDashboard()); 
 
     return Scaffold(
       appBar: AppBar(title: Text('Doctor Dashboard')),
@@ -32,10 +32,11 @@ class DoctorDashboardScreen extends StatelessWidget {
                     color: appointment.isCompleted ? Colors.green : Colors.red,
                   ),
                   onTap: () {
-                    Navigator.pushNamed(
+                    Navigator.push(
                       context,
-                      '/patient-details',
-                      arguments: appointment.patientId,
+                      MaterialPageRoute(
+                        builder: (context) => DoctorDetailsScreen(appointment.patientId),
+                      ),
                     );
                   },
                 );
@@ -44,7 +45,7 @@ class DoctorDashboardScreen extends StatelessWidget {
           } else if (state is DoctorDashboardFailure) {
             return Center(child: Text('Failed to load data: ${state.error}'));
           }
-          return Container(); // Handle other states if needed
+          return Container(); 
         },
       ),
     );
