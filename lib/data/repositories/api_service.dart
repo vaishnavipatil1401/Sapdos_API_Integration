@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:sapdos_api_integration_assignment/domain/entities/doctor.dart';
 import '../models/doctor_dashboard_model.dart';
 import '../models/doctor_model.dart';
 import '../models/patient-model.dart';

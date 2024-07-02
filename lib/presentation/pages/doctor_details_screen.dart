@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sapdos_api_integration_assignment/data/models/doctor_model.dart';
+import 'package:sapdos_api_integration_assignment/domain/entities/doctor.dart';
 import '../bloc/doctor_details/doctor_details_bloc.dart';
 import '../bloc/doctor_details/doctor_details_event.dart';
 import '../bloc/doctor_details/doctor_details_state.dart';
-//import '../models/doctor.dart';
 
 class DoctorDetailsScreen extends StatelessWidget {
   final String doctorId;
@@ -14,7 +13,7 @@ class DoctorDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final doctorDetailsBloc = BlocProvider.of<DoctorDetailsBloc>(context);
-    doctorDetailsBloc.add(FetchDoctorDetails(doctorId));
+    doctorDetailsBloc.add(FetchDoctorDetails(doctorId: doctorId));
 
     return Scaffold(
       appBar: AppBar(title: Text('Doctor Details')),

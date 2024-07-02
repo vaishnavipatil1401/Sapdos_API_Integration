@@ -1,5 +1,5 @@
+// presentation/bloc/book_appointment/book_appointment_event.dart
 import 'package:equatable/equatable.dart';
-import 'package:sapdos_api_integration_assignment/domain/entities/appointment.dart';
 
 abstract class BookAppointmentEvent extends Equatable {
   const BookAppointmentEvent();
@@ -8,11 +8,11 @@ abstract class BookAppointmentEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class SubmitAppointment extends BookAppointmentEvent {
-  final Appointment appointment;
+class BookAppointmentRequested extends BookAppointmentEvent {
+  final Map<String, dynamic> appointmentDetails;
 
-  SubmitAppointment({required this.appointment});
+  const BookAppointmentRequested({required this.appointmentDetails});
 
   @override
-  List<Object> get props => [appointment];
+  List<Object> get props => [appointmentDetails];
 }

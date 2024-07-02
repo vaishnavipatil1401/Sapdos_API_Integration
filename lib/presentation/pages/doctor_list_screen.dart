@@ -10,7 +10,7 @@ class DoctorListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final doctorListBloc = BlocProvider.of<DoctorListBloc>(context);
-    doctorListBloc.add(FetchDoctorList()); 
+    doctorListBloc.add(FetchDoctorList());
 
     return Scaffold(
       appBar: AppBar(title: Text('Doctor List')),
@@ -30,7 +30,7 @@ class DoctorListScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => DoctorDetailsScreen(doctor.id),
+                        builder: (context) => DoctorDetailsScreen(doctorId: doctor.id),
                       ),
                     );
                   },
@@ -40,7 +40,7 @@ class DoctorListScreen extends StatelessWidget {
           } else if (state is DoctorListFailure) {
             return Center(child: Text('Failed to load data: ${state.error}'));
           }
-          return Container(); 
+          return Container();
         },
       ),
     );

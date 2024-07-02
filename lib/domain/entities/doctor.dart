@@ -1,4 +1,4 @@
-//doctor.dart
+// domain/entities/doctor.dart
 class Doctor {
   final String id;
   final String name;
@@ -19,5 +19,14 @@ class Doctor {
       specialization: json['specialization'],
       availableSlots: List<String>.from(json['availableSlots']),
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'specialization': specialization,
+      'availableSlots': availableSlots,
+    };
   }
 }

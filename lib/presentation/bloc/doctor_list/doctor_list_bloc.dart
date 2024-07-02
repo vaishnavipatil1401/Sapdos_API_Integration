@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sapdos_api_integration_assignment/domain/usecases/get_doctor_list.dart';
+import 'package:sapdos_api_integration_assignment/domain/entities/doctor.dart';
 import 'doctor_list_event.dart';
 import 'doctor_list_state.dart';
 
@@ -13,8 +14,9 @@ class DoctorListBloc extends Bloc<DoctorListEvent, DoctorListState> {
   void _onFetchDoctorList(FetchDoctorList event, Emitter<DoctorListState> emit) async {
     emit(DoctorListLoading());
     try {
-      final doctors = await getDoctorListUseCase();
-      emit(DoctorListLoaded(doctors: doctors));
+      final doctorModels = await getDoctorListUseCase();
+      final doctors = doctorModels.map((doctorModel) => doctorModel.toDomain()).toList();
+      emit(DoctorListLoaded(doctors: doctors.cast<Doctor>()));
     } catch (error) {
       emit(DoctorListFailure(error: error.toString()));
     }
