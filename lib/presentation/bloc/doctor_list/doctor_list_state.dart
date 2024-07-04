@@ -1,9 +1,8 @@
+//lib/presentation/bloc/book_appointment/doctor_list_state.dart
 import 'package:equatable/equatable.dart';
 import 'package:sapdos_api_integration_assignment/domain/entities/doctor.dart';
 
 abstract class DoctorListState extends Equatable {
-  const DoctorListState();
-
   @override
   List<Object> get props => [];
 }
@@ -15,7 +14,7 @@ class DoctorListLoading extends DoctorListState {}
 class DoctorListLoaded extends DoctorListState {
   final List<Doctor> doctors;
 
-  const DoctorListLoaded({required this.doctors});
+  DoctorListLoaded({required this.doctors});
 
   @override
   List<Object> get props => [doctors];
@@ -24,7 +23,7 @@ class DoctorListLoaded extends DoctorListState {
 class DoctorListFailure extends DoctorListState {
   final String error;
 
-  const DoctorListFailure({required this.error});
+  DoctorListFailure({required this.error});
 
   @override
   List<Object> get props => [error];

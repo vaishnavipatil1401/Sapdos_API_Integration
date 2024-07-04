@@ -1,22 +1,24 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sapdos_api_integration_assignment/domain/usecases/book_appointment.dart';
-import 'package:sapdos_api_integration_assignment/presentation/bloc/book_appointment/book_appointment_event.dart';
-import 'package:sapdos_api_integration_assignment/presentation/bloc/book_appointment/book_appointment_state.dart';
+import 'package:bloc/bloc.dart';
+import 'package:sapdos_api_integration_assignment/domain/entities/doctor.dart';
+import 'package:sapdos_api_integration_assignment/domain/usecases/get_doctor_list.dart';
+import 'package:sapdos_api_integration_assignment/presentation/bloc/doctor_list/doctor_list_event.dart';
+import 'package:sapdos_api_integration_assignment/presentation/bloc/doctor_list/doctor_list_state.dart';
 
-class BookAppointmentBloc extends Bloc<BookAppointmentEvent, BookAppointmentState> {
-  final BookAppointmentUseCase bookAppointmentUseCase;
+class DoctorListBloc extends Bloc<DoctorListEvent, DoctorListState> {
+  final GetDoctorListUseCase getDoctorListUseCase;
 
-  BookAppointmentBloc({required this.bookAppointmentUseCase}) : super(BookAppointmentInitial()) {
-    on<BookAppointmentEvent>(_onBookAppointmentEvent);
+  DoctorListBloc({required this.getDoctorListUseCase}) : super(DoctorListInitial()) {
+    on<FetchDoctorList>(_onFetchDoctorList);
   }
 
-  void _onBookAppointmentEvent(BookAppointmentEvent event, Emitter<BookAppointmentState> emit) async {
-    emit(BookAppointmentLoading());
+  void _onFetchDoctorList(FetchDoctorList event, Emitter<DoctorListState> emit) async {
+    emit(DoctorListLoading());
     try {
-      final result = await bookAppointmentUseCase(event.appointmentDetails.toString());
-      emit(BookAppointmentSuccess(result: result));
+      final doctorModels = await getDoctorListUseCase();
+      final doctors = doctorModels.map((doctorModel) => doctorModel.toDomain()).toList();
+      emit(DoctorListLoaded(doctors: doctors.cast<Doctor>()));
     } catch (error) {
-      emit(BookAppointmentFailure(error: error.toString()));
+      emit(DoctorListFailure(error: error.toString()));
     }
   }
 }

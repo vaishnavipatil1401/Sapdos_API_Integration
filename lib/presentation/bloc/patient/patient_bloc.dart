@@ -1,4 +1,3 @@
-//patient_bloc.dart
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../data/repositories/api_service.dart';
@@ -10,22 +9,16 @@ part 'patient_state.dart';
 class PatientBloc extends Bloc<PatientEvent, PatientState> {
   final ApiService apiService;
 
-  PatientBloc({required this.apiService}) : super(PatientInitial());
-
-  @override
-  Stream<PatientState> mapEventToState(PatientEvent event) async* {
-    if (event is FetchPatientDetails) {
-      yield* _mapFetchPatientDetailsToState(event);
-    }
+  PatientBloc({required this.apiService}) : super(PatientInitial()) {
+    on<FetchPatientDetails>(_onFetchPatientDetails);
   }
 
-  Stream<PatientState> _mapFetchPatientDetailsToState(
-      FetchPatientDetails event) async* {
+  void _onFetchPatientDetails(FetchPatientDetails event, Emitter<PatientState> emit) async {
     try {
       final patient = await apiService.getPatientDetails(event.patientId);
-      yield PatientLoaded(patient: patient);
+      emit(PatientLoaded(patient: patient));
     } catch (error) {
-      yield PatientFailure(error: error.toString());
+      emit(PatientFailure(error: error.toString()));
     }
   }
 }

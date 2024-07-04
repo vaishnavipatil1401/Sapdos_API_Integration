@@ -48,24 +48,27 @@ class SignUpScreen extends StatelessWidget {
                           Text(
                             'Sapdos',
                             style: TextStyle(
-                              fontSize: 24,
+                              fontSize: 35,
                               fontWeight: FontWeight.bold,
+                              color: Color(0xFF13235A), // Set text color to 13235A
                             ),
                           ),
-                          SizedBox(height: 8),
+                          SizedBox(height: 13),
                           Text(
                             'Register',
                             style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
+                              fontSize: 25,
+                              fontWeight: FontWeight.w800,
+                              color: Color(0xFF13235A), // Set text color to 13235A
                             ),
                           ),
                           SizedBox(height: 8),
                           Text(
                             'Enter new account’s details',
                             style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey,
+                              fontSize: 20,
+                            //  color: Colors.grey,
+                              color: Color(0xFF13235A), // Set text color to 13235A
                             ),
                           ),
                           SizedBox(height: 16),
@@ -76,22 +79,30 @@ class SignUpScreen extends StatelessWidget {
                       controller: emailController,
                       hintText: 'Email',
                       keyboardType: TextInputType.emailAddress,
+                      prefixIcon: Icon(Icons.email, color: Color(0xFF13235A)), // Set icon color to 13235A
                     ),
+                    SizedBox(height: 16),
                     CustomTextField(
                       controller: phoneController,
                       hintText: 'Phone Number',
                       keyboardType: TextInputType.phone,
+                      prefixIcon: Icon(Icons.phone, color: Color(0xFF13235A)), // Set icon color to 13235A
                     ),
+                    SizedBox(height: 16),
                     CustomTextField(
                       controller: passwordController,
                       hintText: 'Password',
                       obscureText: true,
+                      prefixIcon: Icon(Icons.lock, color: Color(0xFF13235A)), // Set icon color to 13235A
                     ),
+                    SizedBox(height: 16),
                     CustomTextField(
                       controller: confirmPasswordController,
                       hintText: 'Confirm Password',
                       obscureText: true,
+                      prefixIcon: Icon(Icons.lock, color: Color(0xFF13235A)), // Set icon color to 13235A
                     ),
+                    SizedBox(height: 16),
                     CustomButton(
                       text: 'Sign-Up',
                       onPressed: () {
@@ -110,6 +121,9 @@ class SignUpScreen extends StatelessWidget {
                           );
                         }
                       },
+                      width: double.infinity, // Set button width to fill the container
+                      color: Color(0xFF13235A), // Set button background color to 13235A
+                      textColor: Colors.white, // Set text color to white
                     ),
                     SizedBox(height: 16),
                     Center(
@@ -121,7 +135,7 @@ class SignUpScreen extends StatelessWidget {
                             onPressed: () {
                               Navigator.pushNamed(context, '/login');
                             },
-                            child: Text('Sign-In'),
+                            child: Text('Sign-In', style: TextStyle(color: Color(0xFF13235A))), // Set text color to 13235A
                           ),
                         ],
                       ),

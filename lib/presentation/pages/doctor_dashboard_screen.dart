@@ -30,12 +30,12 @@ class DoctorDashboardScreen extends StatelessWidget {
                     color: appointment.isCompleted ? Colors.green : Colors.red,
                   ),
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DoctorDetailsScreen(doctorId: appointment.patientId),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => DoctorDetailsScreen(doctorId: appointment.patientId),
+                    //   ),
+                    // );
                   },
                 );
               },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sapdos_api_integration_assignment/domain/entities/doctor.dart';
+import 'package:sapdos_api_integration_assignment/presentation/bloc/doctor_list/doctor_list_bloc.dart';
 import '../bloc/doctor_details/doctor_details_bloc.dart';
 import '../bloc/doctor_details/doctor_details_event.dart';
 import '../bloc/doctor_details/doctor_details_state.dart';

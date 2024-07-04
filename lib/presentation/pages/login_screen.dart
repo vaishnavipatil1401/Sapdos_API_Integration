@@ -10,6 +10,7 @@ import 'package:sapdos_api_integration_assignment/presentation/widgets/custom_te
 class LoginScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final Color primaryColor = Color(0xFF13235A);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class LoginScreen extends StatelessWidget {
           children: [
             Expanded(
               child: Image.asset(
-                'assets/images/main_image.jpg', 
+                'assets/images/main_image.jpg',
                 fit: BoxFit.cover,
               ),
             ),
@@ -42,16 +43,18 @@ class LoginScreen extends StatelessWidget {
                     Text(
                       'Sapdos',
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 36,
                         fontWeight: FontWeight.bold,
+                        color: primaryColor,
                       ),
                     ),
-                    SizedBox(height: 8),
+                    SizedBox(height: 18),
                     Text(
                       'Welcome Back',
                       style: TextStyle(
                         fontSize: 20,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w800,
+                        color: primaryColor,
                       ),
                     ),
                     SizedBox(height: 8),
@@ -59,7 +62,7 @@ class LoginScreen extends StatelessWidget {
                       'Enter existing account’s details',
                       style: TextStyle(
                         fontSize: 16,
-                        color: Colors.grey,
+                        color: primaryColor,
                       ),
                     ),
                     SizedBox(height: 16),
@@ -67,12 +70,14 @@ class LoginScreen extends StatelessWidget {
                       controller: emailController,
                       hintText: 'Email',
                       keyboardType: TextInputType.emailAddress,
+                      prefixIcon: Icon(Icons.email, color: primaryColor),
                     ),
                     SizedBox(height: 16),
                     CustomTextField(
                       controller: passwordController,
                       hintText: 'Password',
                       obscureText: true,
+                      prefixIcon: Icon(Icons.lock, color: primaryColor),
                     ),
                     SizedBox(height: 8),
                     Row(
@@ -82,17 +87,13 @@ class LoginScreen extends StatelessWidget {
                           children: [
                             Checkbox(
                               value: false,
-                              onChanged: (bool? value) {
-                              
-                              },
+                              onChanged: (bool? value) {},
                             ),
                             Text('Remember me'),
                           ],
                         ),
                         TextButton(
-                          onPressed: () {
-                            
-                          },
+                          onPressed: () {},
                           child: Text('Forgot Password?'),
                         ),
                       ],
@@ -101,15 +102,17 @@ class LoginScreen extends StatelessWidget {
                     CustomButton(
                       text: 'Login',
                       onPressed: () {
-                          final loginRequest = LoginRequestModel(
+                        final loginRequest = LoginRequestModel(
                           email: emailController.text,
                           password: passwordController.text,
-                         
                         );
                         BlocProvider.of<LoginUserBloc>(context).add(
                           LoginButtonPressed(loginRequest: loginRequest),
                         );
                       },
+                      width: double.infinity, // Set button width to fill the container
+                      color: primaryColor, // Set button background color
+                      textColor: Colors.white, // Set text color
                     ),
                     SizedBox(height: 16),
                     Center(
@@ -120,7 +123,6 @@ class LoginScreen extends StatelessWidget {
                           TextButton(
                             onPressed: () {
                               Navigator.pushNamed(context, '/sign-up');
-                              //Navigator.pushNamed(context, '/doctor-dashboard');
                             },
                             child: Text('Sign-Up'),
                           ),
