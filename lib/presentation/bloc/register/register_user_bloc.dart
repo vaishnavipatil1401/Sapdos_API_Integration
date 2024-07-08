@@ -1,25 +1,34 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sapdos_api_integration_assignment/data/models/register_request_model.dart';
-import 'package:sapdos_api_integration_assignment/domain/usecases/register.dart';
-import 'package:sapdos_api_integration_assignment/presentation/bloc/register/register_user_event.dart';
-import 'package:sapdos_api_integration_assignment/presentation/bloc/register/register_user_state.dart';
+import 'package:sapdos_api_integration_assignment/domain/usecases/login.dart';
+import 'package:sapdos_api_integration_assignment/presentation/bloc/login/login_user_event.dart';
+import 'package:sapdos_api_integration_assignment/presentation/bloc/login/login_user_state.dart';
 
-class RegisterUserBloc extends Bloc<RegisterUserEvent, RegisterUserState> {
-  final RegisterUseCase registerUseCase;
+import 'package:dio/dio.dart';
 
-  RegisterUserBloc({required this.registerUseCase}) : super(RegisterUserInitial()) {
-    on<RegisterButtonPressed>(_onRegisterButtonPressed);
-  }
+class LoginUserBloc extends Bloc<LoginUserEvent, LoginUserState> {
+  final LoginUseCase loginUseCase;
 
-  void _onRegisterButtonPressed(RegisterButtonPressed event, Emitter<RegisterUserState> emit) async {
-    emit(RegisterUserLoading());
-    try {
-      final response = await registerUseCase(event.registerRequest);
-      print('Registration response: $response');
-      emit(RegisterUserSuccess(message: response.message ?? 'Registration successful'));
-    } catch (error) {
-      print('Registration error: $error');
-      emit(RegisterUserFailure(error: error.toString()));
-    }
+  LoginUserBloc({required this.loginUseCase}) : super(LoginUserInitial()) {
+    on<LoginButtonPressed>((event, emit) async {
+      emit(LoginUserLoading());
+      try {
+        final loginResponse = await loginUseCase(event.loginRequest);
+        if (loginResponse.token != null) {
+          emit(LoginUserSuccess(token: loginResponse.token!));
+        } else {
+          emit(LoginUserFailure(error: 'Invalid response from server'));
+        }
+      } on DioError catch (dioError) {
+        if (dioError.response?.statusCode == 404) {
+          emit(LoginUserFailure(error: 'Unable to find your account'));
+        } else if (dioError.response?.statusCode == 401) {
+          emit(LoginUserFailure(error: 'Incorrect password'));
+        } else {
+          emit(LoginUserFailure(error: dioError.message));
+        }
+      } catch (error) {
+        emit(LoginUserFailure(error: error.toString()));
+      }
+    });
   }
 }

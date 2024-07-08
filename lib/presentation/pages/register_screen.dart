@@ -139,8 +139,8 @@ class RegisterScreen extends StatelessWidget {
                               );
                             }
                           },
-                          color: primaryColor, 
-                          textColor: Colors.white, 
+                          color: primaryColor,
+                          textColor: Colors.white,
                         ),
                       ),
                       SizedBox(height: 16),
