@@ -1,11 +1,11 @@
 class LoginResponseModel {
-  final String token;
+  final String? token;
 
-  LoginResponseModel({required this.token});
+  LoginResponseModel({this.token});
 
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) {
     return LoginResponseModel(
-      token: json['token'],
+      token: json['token'] as String?,
     );
   }
 }

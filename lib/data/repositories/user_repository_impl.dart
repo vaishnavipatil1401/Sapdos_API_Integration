@@ -1,4 +1,3 @@
-//user_repository_impl.dart
 import 'package:sapdos_api_integration_assignment/data/models/login_request_model.dart';
 import 'package:sapdos_api_integration_assignment/data/models/login_response_model.dart';
 import 'package:sapdos_api_integration_assignment/data/models/register_request_model.dart';
@@ -13,19 +12,27 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<LoginResponseModel> login(LoginRequestModel requestModel) async {
-    final response = await apiService.post(
-      'https://sapdos-api-v2.azurewebsites.net/api/Credentials/Login',
-      requestModel.toJson(),
-    );
-    return LoginResponseModel.fromJson(response);
+    try {
+      final response = await apiService.post(
+        'https://sapdos-api-v2.azurewebsites.net/api/Credentials/Login',
+        requestModel.toJson(),
+      );
+      return LoginResponseModel.fromJson(response);
+    } catch (error) {
+      throw Exception('Failed to login: $error');
+    }
   }
 
   @override
   Future<RegisterResponseModel> register(RegisterRequestModel requestModel) async {
-    final response = await apiService.post(
-      'https://sapdos-api-v2.azurewebsites.net/api/Credentials/Register',
-      requestModel.toJson(),
-    );
-    return RegisterResponseModel.fromJson(response);
+    try {
+      final response = await apiService.post(
+        'https://sapdos-api-v2.azurewebsites.net/api/Credentials/Register',
+        requestModel.toJson(),
+      );
+      return RegisterResponseModel.fromJson(response);
+    } catch (error) {
+      throw Exception('Failed to register: $error');
+    }
   }
 }

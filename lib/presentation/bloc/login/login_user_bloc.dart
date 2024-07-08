@@ -6,18 +6,19 @@ import 'login_user_state.dart';
 class LoginUserBloc extends Bloc<LoginUserEvent, LoginUserState> {
   final LoginUseCase loginUseCase;
 
-  LoginUserBloc({required this.loginUseCase}) : super(LoginUserInitial());
-
-  @override
-  Stream<LoginUserState> mapEventToState(LoginUserEvent event) async* {
-    if (event is LoginButtonPressed) {
-      yield LoginUserLoading();
+  LoginUserBloc({required this.loginUseCase}) : super(LoginUserInitial()) {
+    on<LoginButtonPressed>((event, emit) async {
+      emit(LoginUserLoading());
       try {
         final loginResponse = await loginUseCase(event.loginRequest);
-        yield LoginUserSuccess(token: loginResponse.token);
+        if (loginResponse.token != null) {
+          emit(LoginUserSuccess(token: loginResponse.token!));
+        } else {
+          emit(LoginUserFailure(error: 'Invalid response from server'));
+        }
       } catch (error) {
-        yield LoginUserFailure(error: error.toString());
+        emit(LoginUserFailure(error: error.toString()));
       }
-    }
+    });
   }
 }

@@ -1,17 +1,17 @@
-import 'package:equatable/equatable.dart';
+// import 'package:equatable/equatable.dart';
 
-abstract class DoctorDetailsEvent extends Equatable {
-  const DoctorDetailsEvent();
+// abstract class DoctorDetailsEvent extends Equatable {
+//   const DoctorDetailsEvent();
 
-  @override
-  List<Object> get props => [];
-}
+//   @override
+//   List<Object> get props => [];
+// }
 
-class FetchDoctorDetails extends DoctorDetailsEvent {
-  final String doctorId;
+// class FetchDoctorDetails extends DoctorDetailsEvent {
+//   final String doctorId;
 
-  FetchDoctorDetails({required this.doctorId});
+//   FetchDoctorDetails({required this.doctorId});
 
-  @override
-  List<Object> get props => [doctorId];
-}
+//   @override
+//   List<Object> get props => [doctorId];
+// }

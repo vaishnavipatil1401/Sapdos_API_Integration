@@ -1,11 +1,11 @@
 class RegisterResponseModel {
-  final String message;
+  final String? message;
 
-  RegisterResponseModel({required this.message});
+  RegisterResponseModel({this.message});
 
   factory RegisterResponseModel.fromJson(Map<String, dynamic> json) {
     return RegisterResponseModel(
-      message: json['message'],
+      message: json['message'] as String?,
     );
   }
 }

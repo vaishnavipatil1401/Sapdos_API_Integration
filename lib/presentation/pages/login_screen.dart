@@ -8,6 +8,7 @@ import 'package:sapdos_api_integration_assignment/presentation/widgets/custom_bu
 import 'package:sapdos_api_integration_assignment/presentation/widgets/custom_text_field.dart';
 
 class LoginScreen extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final Color primaryColor = Color(0xFF13235A);
@@ -37,99 +38,64 @@ class LoginScreen extends StatelessWidget {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Sapdos',
-                      style: TextStyle(
-                        fontSize: 36,
-                        fontWeight: FontWeight.bold,
-                        color: primaryColor,
-                      ),
-                    ),
-                    SizedBox(height: 18),
-                    Text(
-                      'Welcome Back',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w800,
-                        color: primaryColor,
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      'Enter existing account’s details',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: primaryColor,
-                      ),
-                    ),
-                    SizedBox(height: 16),
-                    CustomTextField(
-                      controller: emailController,
-                      hintText: 'Email',
-                      keyboardType: TextInputType.emailAddress,
-                      prefixIcon: Icon(Icons.email, color: primaryColor),
-                    ),
-                    SizedBox(height: 16),
-                    CustomTextField(
-                      controller: passwordController,
-                      hintText: 'Password',
-                      obscureText: true,
-                      prefixIcon: Icon(Icons.lock, color: primaryColor),
-                    ),
-                    SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: false,
-                              onChanged: (bool? value) {},
-                            ),
-                            Text('Remember me'),
-                          ],
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Sapdos',
+                        style: TextStyle(
+                          fontSize: 36,
+                          fontWeight: FontWeight.bold,
+                          color: primaryColor,
                         ),
-                        TextButton(
-                          onPressed: () {},
-                          child: Text('Forgot Password?'),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 16),
-                    CustomButton(
-                      text: 'Login',
-                      onPressed: () {
-                        final loginRequest = LoginRequestModel(
-                          email: emailController.text,
-                          password: passwordController.text,
-                        );
-                        BlocProvider.of<LoginUserBloc>(context).add(
-                          LoginButtonPressed(loginRequest: loginRequest),
-                        );
-                      },
-                      width: double.infinity, // Set button width to fill the container
-                      color: primaryColor, // Set button background color
-                      textColor: Colors.white, // Set text color
-                    ),
-                    SizedBox(height: 16),
-                    Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Not on Sapdos?'),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/sign-up');
-                            },
-                            child: Text('Sign-Up'),
-                          ),
-                        ],
                       ),
-                    ),
-                  ],
+                      SizedBox(height: 18),
+                      Text(
+                        'Welcome Back',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w800,
+                          color: primaryColor,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        'Enter existing account’s details',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: primaryColor,
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      CustomTextField(
+                        controller: emailController,
+                        hintText: 'Email',
+                      ),
+                      SizedBox(height: 16),
+                      CustomTextField(
+                        controller: passwordController,
+                        hintText: 'Password',
+                        obscureText: true,
+                      ),
+                      SizedBox(height: 16),
+                      CustomButton(
+                        text: 'Sign In',
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            final loginRequest = LoginRequestModel(
+                              email: emailController.text,
+                              password: passwordController.text,
+                            );
+                            BlocProvider.of<LoginUserBloc>(context).add(
+                              LoginButtonPressed(loginRequest: loginRequest),
+                            );
+                          }
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

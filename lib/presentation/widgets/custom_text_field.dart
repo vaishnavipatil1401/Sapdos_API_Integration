@@ -6,6 +6,7 @@ class CustomTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final bool obscureText;
   final Widget? prefixIcon;
+  final String? Function(String?)? validator;
 
   const CustomTextField({
     required this.controller,
@@ -13,13 +14,14 @@ class CustomTextField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.obscureText = false,
     this.prefixIcon,
+    this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: TextField(
+      child: TextFormField(
         controller: controller,
         keyboardType: keyboardType,
         obscureText: obscureText,
@@ -28,6 +30,7 @@ class CustomTextField extends StatelessWidget {
           hintText: hintText,
           prefixIcon: prefixIcon,
         ),
+        validator: validator,
       ),
     );
   }
