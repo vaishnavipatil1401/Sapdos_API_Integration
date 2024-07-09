@@ -1,11 +1,12 @@
+// doctor_list_screen.dart
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sapdos_api_integration_assignment/presentation/bloc/book_appointment/book_appointment_bloc.dart';
 import 'package:sapdos_api_integration_assignment/presentation/bloc/doctor_list/doctor_list_bloc.dart';
 import 'package:sapdos_api_integration_assignment/domain/entities/doctor.dart';
 import 'package:sapdos_api_integration_assignment/presentation/bloc/doctor_list/doctor_list_event.dart';
 import 'package:sapdos_api_integration_assignment/presentation/bloc/doctor_list/doctor_list_state.dart';
-import 'package:sapdos_api_integration_assignment/presentation/pages/doctor_details_screen.dart';
+import 'doctor_details_screen.dart';
 
 class DoctorListScreen extends StatelessWidget {
   @override
@@ -28,12 +29,12 @@ class DoctorListScreen extends StatelessWidget {
                   title: Text(doctor.name),
                   subtitle: Text(doctor.specialization),
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DoctorDetailsScreen(doctorId: doctor.id),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => DoctorDetailsScreen(doctorId: doctor.id),
+                    //   ),
+                    // );
                   },
                 );
               },

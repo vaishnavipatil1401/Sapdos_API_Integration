@@ -1,3 +1,4 @@
+//appointment.dart
 class Appointment {
   final String id;
   final String patientName;

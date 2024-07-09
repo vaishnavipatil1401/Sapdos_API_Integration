@@ -1,3 +1,4 @@
+//doctor_dashboard_state.dart
 import 'package:equatable/equatable.dart';
 import 'package:sapdos_api_integration_assignment/data/models/doctor_dashboard_model.dart';
 

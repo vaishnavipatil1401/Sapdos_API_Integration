@@ -1,3 +1,5 @@
+// doctor_model.dart
+
 import 'package:sapdos_api_integration_assignment/domain/entities/doctor.dart';
 
 class DoctorModel {

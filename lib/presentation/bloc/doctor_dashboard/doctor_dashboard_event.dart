@@ -7,4 +7,12 @@ abstract class DoctorDashboardEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class FetchDoctorDashboard extends DoctorDashboardEvent {}
+class FetchDoctorDashboard extends DoctorDashboardEvent {
+  final String doctorId;
+  final String date;
+
+  FetchDoctorDashboard({required this.doctorId, required this.date});
+
+  @override
+  List<Object?> get props => [doctorId, date];
+}

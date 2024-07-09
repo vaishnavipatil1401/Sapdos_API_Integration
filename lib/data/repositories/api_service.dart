@@ -1,8 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:sapdos_api_integration_assignment/domain/entities/doctor.dart';
-import '../models/doctor_dashboard_model.dart';
-import '../models/doctor_model.dart';
-import '../models/patient-model.dart';
+import 'package:sapdos_api_integration_assignment/data/models/doctor_dashboard_model.dart';
 
 class ApiService {
   final Dio _dio;
@@ -25,16 +22,6 @@ class ApiService {
     ));
   }
 
-  Future<Map<String, dynamic>> post(String url, Map<String, dynamic> data) async {
-    try {
-      final response = await _dio.post(url, data: data);
-      return response.data as Map<String, dynamic>;
-    } on DioError catch (e) {
-      print('Error in post request: ${e.response?.statusCode} ${e.response?.data}');
-      throw Exception('Failed to perform POST request');
-    }
-  }
-
   Future<Map<String, dynamic>> get(String url) async {
     try {
       final response = await _dio.get(url);
@@ -45,24 +32,19 @@ class ApiService {
     }
   }
 
-  Future<DoctorDashboardModel> getDoctorDashboard() async {
-    final response = await get('/Doctor/GetDoctorDashbord');
+  Future<Map<String, dynamic>> getDoctorDetails(String doctorId) async {
+    final response = await get('/Doctor/GetDoctorByUId?DoctorUId=$doctorId');
+    return response;
+  }
+
+  Future<DoctorDashboardModel> getDoctorDashboard(String doctorId, String date) async {
+    final response = await get('/Doctor/GetDoctorDashbord?DoctorUId=$doctorId&Date=$date');
     return DoctorDashboardModel.fromJson(response);
   }
 
-  Future<Patient> getPatientDetails(String patientId) async {
-    final response = await get('/Patient/GetPatientByUId?PatientUId=$patientId');
-    return Patient.fromJson(response);
-  }
-
-  Future<Doctor> getDoctorDetails(String doctorId) async {
-    final response = await get('/Doctor/GetDoctorByUId?DoctorUId=$doctorId');
-    return Doctor.fromJson(response);
-  }
-
-  Future<List<Doctor>> getDoctorList() async {
-    final response = await get('/Doctor/GetDoctorList');
-    final doctors = (response['data'] as List).map((e) => Doctor.fromJson(e)).toList();
-    return doctors;
+  Future<List<Map<String, dynamic>>> getAllDoctors() async {
+    final response = await get('/Doctor/GetAllDoctors');
+    final List<dynamic> doctorListJson = response['data'] as List<dynamic>;
+    return doctorListJson.map((json) => json as Map<String, dynamic>).toList();
   }
 }

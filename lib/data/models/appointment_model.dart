@@ -1,22 +1,25 @@
 class Appointment {
-  final String patientName;
-  final String time;
-  final bool isCompleted;
-  final String patientId;
+  final String slotUId;
+  final String patientUId;
+  final String name;
+  final String slotTime;
+  final bool treated;
 
   Appointment({
-    required this.patientName,
-    required this.time,
-    required this.isCompleted,
-    required this.patientId,
+    required this.slotUId,
+    required this.patientUId,
+    required this.name,
+    required this.slotTime,
+    required this.treated,
   });
 
-  factory Appointment.fromJson(Map<String, dynamic>? json) {
+  factory Appointment.fromJson(Map<String, dynamic> json) {
     return Appointment(
-      patientName: json?['patientName'] ?? '',
-      time: json?['time'] ?? '',
-      isCompleted: json?['isCompleted'] ?? false,
-      patientId: json?['patientId'] ?? '',
+      slotUId: json['slotUId'] ?? '',
+      patientUId: json['patientUId'] ?? '',
+      name: json['name'] ?? '',
+      slotTime: json['slotTime'] ?? '',
+      treated: json['treated'] ?? false,
     );
   }
 }

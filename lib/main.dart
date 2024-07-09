@@ -19,7 +19,7 @@ import 'presentation/bloc/doctor_list/doctor_list_bloc.dart';
 import 'presentation/bloc/doctor_details/doctor_details_bloc.dart';
 import 'presentation/bloc/book_appointment/book_appointment_bloc.dart';
 import 'presentation/pages/login_screen.dart';
-import 'presentation/pages/sign_up_screen.dart';
+import 'presentation/pages/register_screen.dart';
 import 'presentation/pages/doctor_dashboard_screen.dart';
 import 'presentation/pages/patient_details_screen.dart';
 import 'presentation/pages/patient_list_screen.dart';
@@ -80,3 +80,4 @@ class SapdosApiIntegrationApp extends StatelessWidget {
     );
   }
 }
+
